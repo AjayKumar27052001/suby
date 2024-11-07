@@ -1,7 +1,7 @@
 const Vendor = require("../models/Vendor");
 const multer = require("multer");
 const path = require("path");
-const Firm = require("../models/firm");
+const Firm = require("../models/Firm");
 
 const storage = multer.diskStorage({
   filename: function (req, file, cb) {
