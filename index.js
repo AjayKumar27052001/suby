@@ -15,7 +15,7 @@ mongoose
   .then(() => console.log("db connected sucessfully"))
   .catch((error) => console.log(error));
 
-app.use("/home", (req, res) => {
+app.use("/", (req, res) => {
   res.send("welcome to suby");
 });
 app.use("/vendor", vendorrouter);
