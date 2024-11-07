@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 const Vendor = require("../models/Vendor");
 const jwt = require("jsonwebtoken");
+const Product = require("../models/Product");
 
 dotenv.config();
 const secretkey = process.env.secretKey;
@@ -52,7 +53,13 @@ const vendorLogin = async (req, res) => {
 };
 const getAllVendors = async (req, res) => {
   try {
-    const vendors = await Vendor.find().populate("firm");
+    const vendors = await Vendor.find().populate({
+      path: "firm",
+      populate: {
+        path: "products", // Populate the products field within the firm
+        model: "Product", // Make sure to specify the model for products
+      },
+    });
     return res.json({ vendors });
   } catch (error) {
     console.log("internal server error is", error);
@@ -63,7 +70,13 @@ const getAllVendors = async (req, res) => {
 const getSingleVendor = async (req, res) => {
   const vendor_Id = req.params.apple;
   try {
-    const singleVendor = await Vendor.findById(vendor_Id).populate("firm");
+    const singleVendor = await Vendor.findById(vendor_Id).populate({
+      path: "firm",
+      populate: {
+        path: "products", // Populate the products field within the firm
+        model: "Product", // Make sure to specify the model for products
+      },
+    });
     if (!singleVendor) {
       return res.status(404).json({ message: "Vendor Id not found" });
     }

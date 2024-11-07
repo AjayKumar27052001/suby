@@ -8,7 +8,7 @@ const {
   deleteProductById,
 } = require("../controllers/productController");
 router.post("/addProduct/:firmId", addProduct);
-router.post("/deleteProduct/:productId", deleteProductById);
+router.delete("/deleteProduct/:productId", deleteProductById);
 router.get("/getproduct/:firmId", getProductByFirm);
 router.get("/uploads/:imageName", (req, res) => {
   const imageName = req.params.imageName;

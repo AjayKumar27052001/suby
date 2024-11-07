@@ -4,7 +4,11 @@ const firmController = require("../controllers/firmController");
 const path = require("path");
 const router = express.Router();
 router.post("/add-firm", verifyToken, firmController.addFirm);
-router.post("/delete-firm/:firmId", verifyToken, firmController.deleteFirmById);
+router.delete(
+  "/delete-firm/:firmId",
+  verifyToken,
+  firmController.deleteFirmById
+);
 router.get("/uploads/:imageName", (req, res) => {
   const imageName = req.params.imageName;
   res.header("content-Type", "image/jpeg");
