@@ -11,8 +11,10 @@ dotenv.config();
 app.use(express.json());
 app.use(bodyParser.json());
 mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("db connected sucessfully"))
+  .connect(process.env.MONGO_URI, {
+    serverSelectionTimeoutMS: 5000, // 5 seconds timeout
+  })
+  .then(() => console.log("db connected successfully"))
   .catch((error) => console.log(error));
 
 app.use("/home", (req, res) => {
